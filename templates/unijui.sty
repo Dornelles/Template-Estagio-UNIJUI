@@ -1,0 +1,175 @@
+%%
+%% Customizações do abnTeX2 (http://abnTeX2.googlecode.com) para a Universidade XXXX
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% The Current Maintainer of this work is Prof. Dr. Eldair F. Dornelles, eldair.dornelles@gmail.com
+%%
+%% Further information about abnTeX2 are available on http://abntex2.googlecode.com/
+%%
+
+% ---
+% INICIO DAS CUSTOMIZACOES PARA A UNIVERSIDADE XXX
+% ---
+
+% --------- mudar a fonte padrão do ---------
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault} % Define Arial como fonte principal
+% ------------------------------------------
+
+% ---------  Mudar tamanho da fonte dos títulos de capitulo seções e subseções ---------
+\renewcommand{\ABNTEXchapterfontsize}{\Large}  % tamanho da fonte do número do capítulo
+\renewcommand{\ABNTEXsectionfontsize}{\bfseries\large}   % Define o tamanho da fonte do número da seção
+\renewcommand{\ABNTEXsubsectionfontsize}{\large}  % Define o tamanho da fonte do número da subseção
+\renewcommand{\ABNTEXsubsubsectionfontsize}{\normalsize} % Define o tamanho da fonte do número da subsubseção
+% ------------------------------------------------------------------------
+
+% ---------  Mudar tamanho da fonte dos títulos de capitulo seções e subseções ---------
+\renewcommand{\cftchapterfont}{\bfseries\normalsize} % Mantém negrito e reduz tamanho
+\renewcommand{\cftsectionfont}{\bfseries\normalsize} % Mantém negrito nas seções
+\renewcommand{\cftsubsectionfont}{\normalsize} % Mantém normal nas subseções
+% ------------------------------------------------------------------------
+
+% ------- redefinindo o \chapter para não iniciar na pagina seguinte ----- 
+
+% --------------------------------------------------------------------------------------
+
+\newcommand{\registroacademicodoaluno}[1]{#1}
+\renewcommand{\registroacademicodoaluno}[1]{\def\imprimirregistroacademicodoaluno{#1}}
+
+\newcommand{\campus}[1]{#1}
+\renewcommand{\campus}[1]{\def\imprimircampus{\MakeUppercase{CAMPUS #1}}}
+
+\newcommand{\curso}[1]{#1}
+\renewcommand{\curso}[1]{\def\imprimircurso{CURSO DE \MakeUppercase{#1}}}
+
+\newcommand{\empresa}[1]{#1}
+\renewcommand{\empresa}[1]{\def\imprimirempresa{#1}}
+
+\newcommand{\supervisor}[1]{#1}
+\renewcommand{\supervisor}[1]{\def\imprimirsupervisor{#1}}
+
+\newcommand{\titulodoestagio}[1]{#1}
+\renewcommand{\titulodoestagio}[1]{\def\imprimirtitulodoestagio{#1}}
+
+\newcommand{\periodo}[1]{#1}
+\renewcommand{\periodo}[1]{\def\imprimirperiodo{#1}}
+
+\newcommand{\datadeiniciodoestagio}[1]{#1}
+\renewcommand{\datadeiniciodoestagio}[1]{\def\imprimirdatadeiniciodoestagio{#1}}
+
+\newcommand{\datadeterminodoestagio}[1]{#1}
+\renewcommand{\datadeterminodoestagio}[1]{\def\imprimirdatadeterminodoestagio{#1}}
+
+
+
+% ------------------ construindo a capa do Relátorio -----------------------
+\renewcommand{\imprimircapa}{%
+  \begin{capa}%
+    \center
+    \ABNTEXchapterfont\Large\imprimirinstituicao{- }\imprimircampus
+    \par
+    \imprimircurso\\
+    \vspace*{1cm}
+    \vfill
+    {\ABNTEXchapterfont\large\imprimirautor}
+    \vfill
+    \ABNTEXchapterfont\bfseries\LARGE\imprimirtitulo
+    \vfill \vfill \vfill
+    \large{\textnormal{\imprimirlocal}}
+    \par
+    \large{\textnormal{\imprimirdata}}
+    \vspace*{1cm}
+  \end{capa}
+}
+
+% --------------- construindo a folha de rosto do Relátorio --------------------
+\makeatletter
+\renewcommand{\folhaderostocontent}{
+  \begin{center}
+    {\ABNTEXchapterfont\large\imprimirautor}
+    \vspace*{\fill}\vspace*{\fill}
+    \begin{center}
+      \ABNTEXchapterfont\bfseries\LARGE\MakeUppercase{\imprimirtitulodoestagio}
+    \end{center}
+    \vspace*{\fill}
+    \abntex@ifnotempty{\imprimirpreambulo}{%
+      \hspace{.45\textwidth}
+      \begin{minipage}{.5\textwidth}
+      \SingleSpacing
+      \imprimirpreambulo
+      \end{minipage}%
+      \vspace*{\fill}
+    }%
+    \begin{flushleft}
+        {\large\normalsize\imprimirorientadorRotulo~\imprimirorientador}\\
+        {\raggedright\normalsize Supervisor: \imprimirsupervisor}
+    \end{flushleft}
+    
+%     \abntex@ifnotempty{\imprimircoorientador}{%
+%       {\large\imprimircoorientadorRotulo~\imprimircoorientador}%
+%     }%
+    \vfill
+    \large\imprimirlocal
+    \par
+    \large\imprimirdata
+    \vspace*{1cm}
+  \end{center}
+}
+\makeatother
+
+% --------------- construindo uma folha de dados --------------------
+
+
+\makeatletter
+\newcommand{\imprimirfolhadedados}{
+    
+    \begin{center}
+        {\ABNTEXchapterfont\Large{\imprimirinstituicao - \imprimircampus}\\}
+        % \vspace{1mm}
+        {\Large\imprimircurso\\}
+          \vfill
+        {\ABNTEXchapterfont\large\imprimirtitulo}\\
+         % {\ABNTEXchapterfont\bfseries\Large\imprimirtitulo}\\
+        \vfill
+        {\ABNTEXchapterfont\bfseries\Large\imprimirtitulodoestagio}\\
+        \vfill
+        {\raggedright
+        {\bfseries\large Dados do Estagiário}\\
+        \vspace*{3mm}
+        Nome: \imprimirautor\\
+        Registro acadêmico: \imprimirregistroacademicodoaluno\\
+        Periodo: \imprimirperiodo\\ }
+        
+        \vspace*{1cm}
+        {\raggedright
+        {\bfseries\large Dados do Estágio}\\
+        \vspace*{3mm}
+        Início e término do estágio: \imprimirdatadeiniciodoestagio{ } a \imprimirdatadeterminodoestagio\\
+        Empresa: \imprimirempresa \\
+        Supervisor técnico: \imprimirsupervisor\\ 
+        Orientador pedagógico: \imprimirorientador\\}
+      \end{center}
+      
+   \begin{center}
+        \vspace*{0.5cm}
+        {\large\imprimirlocal}
+        \par
+        {\large\imprimirdata}
+        \vspace*{1cm}
+    \end{center}
+    \newpage
+}
+\makeatother
+
+% ---
+% FIM DAS CUSTOMIZACOES PARA A UNIVERSIDADE UNIJUÍ
+% ---
